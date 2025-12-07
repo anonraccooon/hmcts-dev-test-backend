@@ -14,6 +14,9 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Controller Exception Handler.
+ */
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -37,6 +40,9 @@ public class GlobalExceptionHandler {
 
     }
 
+    /**
+     * Error thrown when a Task cannot be found in the repository.
+     */
     @ExceptionHandler(NoSuchTaskExistsException.class)
     public ResponseEntity<ErrorResponse> handleNoSuchTaskExistsException(NoSuchTaskExistsException ex,
                                                                          WebRequest request) {
@@ -44,6 +50,9 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * Validation error based on constraints set by the Task object.
+     */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidationExceptions(MethodArgumentNotValidException ex,
                                                                     WebRequest request) {
@@ -61,6 +70,9 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
+    /**
+     * Handles generic server-based errors.
+     */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleAllExceptions(Exception ex, WebRequest request) {
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR,

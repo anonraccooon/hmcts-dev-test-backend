@@ -1,10 +1,41 @@
 # HMCTS Dev Test Backend
-This will be the backend for the brand new HMCTS case management system. As a potential candidate we are leaving
-this in your hands. Please refer to the brief for the complete list of tasks! Complete as much as you can and be
-as creative as you want.
 
-You should be able to run `./gradlew build` to start with to ensure it builds successfully. Then from that you
-can run the service in IntelliJ (or your IDE of choice) or however you normally would.
+The backend portion of the HMCTS case management system. The frontend can be found at: https://github.com/anonraccooon/hmcts-dev-test-frontend
 
-There is an example endpoint provided to retrieve an example of a case. You are free to add/remove fields as you
-wish.
+The technology stack includes Java 21, Spring Boot, and PostgreSQL.
+
+## Build
+
+```bash
+./gradlew build
+```
+
+## Database
+
+This application requires PostgreSQL. To set up the Database using the psql shell, run the following:
+```bash
+psql -h localhost -U postgres -p 5432
+(Input your superuser password)
+
+postgres=# CREATE USER app_user WITH PASSWORD 'password';
+postgres=# CREATE DATABASE hmcts_dev_db OWNER app_user;
+
+```
+
+## Running
+
+Simply run the application file located at src/main/java/uk/gov/hmcts/reform/dev/Application.java
+The application runs on **https://localhost:4000**
+
+The frontend must also be running to access the full application
+
+## Endpoints
+
+1. /  -> Landing page
+2. GET /tasks -> Returns a list of all tasks currently in the database
+3. POST /tasks (RequestBody: Task) -> Validates and creates a new task, saving it in the database
+4. GET /tasks/{id} -> Returns the details for one specific task based on the id
+
+## Testing
+
+Unit tests for the application can be found and run at src/test/java/uk/gov/hmcts/reform/dev

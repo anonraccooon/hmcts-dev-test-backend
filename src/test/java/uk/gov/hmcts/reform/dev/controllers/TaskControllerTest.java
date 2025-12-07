@@ -15,6 +15,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
+/**
+ * Unit tests for TaskController, verifying endpoint behaviors like task creation and validation.
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 public class TaskControllerTest {

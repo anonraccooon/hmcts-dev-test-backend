@@ -14,6 +14,10 @@ import java.time.LocalDateTime;
 
 import static uk.gov.hmcts.reform.dev.utils.JsoupHtmlSanitizer.sanitize;
 
+/**
+ * Entity representing a Task with fields for title, description, status, and dates.
+ * Includes validation and sanitization for inputs.
+ */
 @NoArgsConstructor
 @Getter
 @Entity
@@ -41,6 +45,15 @@ public class Task {
     @Column
     private String dueDate;
 
+    /**
+     * Constructor for creating a Task with required fields.
+     * Automatically sanitizes and sets values.
+     *
+     * @param title the task title
+     * @param description the task description
+     * @param status the task status
+     * @param dueDate the due date
+     */
     public Task(String title, String description, String status, String dueDate) {
         setTitle(title);
         setDescription(description);
@@ -48,22 +61,43 @@ public class Task {
         setDueDate(dueDate);
     }
 
+    /**
+     * Sets the title after sanitizing it to remove HTML tags.
+     *
+     * @param title the title to set
+     */
     public void setTitle(String title) {
         this.title = sanitize(title);
     }
 
+    /**
+     * Sets the description after sanitizing it to remove HTML tags.
+     *
+     * @param description the description to set
+     */
     public void setDescription(String description) {
         this.description = sanitize(description);
     }
 
+    /**
+     * Sets the status to "Completed" if provided and non-empty; otherwise, sets to empty.
+     *
+     * @param status the status to set
+     */
     public void setStatus(String status) {
-        if (status != null && status.equals("Completed")) {
+        if (status != null && !status.isEmpty()) {
             this.status = "Completed";
         } else {
             this.status = "";
         }
     }
 
+    /**
+     * Sets the due date after trimming and validating it as a parsable LocalDateTime.
+     * If invalid or null, sets to empty.
+     *
+     * @param dueDate the due date to set
+     */
     public void setDueDate(String dueDate) {
         if (dueDate != null) {
             this.dueDate = dueDate.trim();

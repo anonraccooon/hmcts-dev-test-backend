@@ -10,6 +10,9 @@ import uk.gov.hmcts.reform.dev.repositories.TaskRepository;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+/**
+ * Unit tests for TaskService, verifying input validation and database persistance.
+ */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class TaskServiceTest {
@@ -44,7 +47,7 @@ class TaskServiceTest {
         TaskService taskService = new TaskService(taskRepository);
         Task task = new Task("Test Title",
                              "",
-                             "Invalid",
+                             "",
                              "Invalid");
 
         // Act
