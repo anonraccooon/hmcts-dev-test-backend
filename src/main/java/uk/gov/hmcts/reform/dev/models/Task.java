@@ -9,7 +9,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
 
@@ -58,11 +57,10 @@ public class Task {
     }
 
     public void setStatus(String status) {
-        if (status.equals("Completed")) {
+        if (status != null && status.equals("Completed")) {
             this.status = "Completed";
-        }
-        else {
-            this.status = null;
+        } else {
+            this.status = "";
         }
     }
 
@@ -72,10 +70,10 @@ public class Task {
             try {
                 LocalDateTime.parse(this.dueDate);
             } catch (Exception e) {
-                this.dueDate = null;
+                this.dueDate = "";
             }
         } else {
-            this.dueDate = null;
+            this.dueDate = "";
         }
     }
 
